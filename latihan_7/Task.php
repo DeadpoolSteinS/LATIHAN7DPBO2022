@@ -41,7 +41,7 @@ class Task extends DB{
 
 	function sorting($by)
 	{
-		$query = "SELECT * FROM tb_to_do ORDER BY $by ASC";
+		$query = ($by == "priority_td") ? "SELECT * FROM tb_to_do ORDER BY CASE WHEN priority_td = 'Low' THEN '1' WHEN priority_td = 'Medium' THEN '2' WHEN priority_td = 'High' THEN '3' END ASC" : "SELECT * FROM tb_to_do ORDER BY $by ASC";
 		$this->execute($query);
 	}
 }
